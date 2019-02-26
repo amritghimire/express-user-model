@@ -51,19 +51,17 @@ describe('Account', function () {
             email.address.should.eql('iamritghimire@gmail.com');
             account.addEmail('mail@ranjitghimire.com.np');
             account.save();
-            done();
+        }).then(function () {
+            Account.findOne({username: '12345'}, function (err, account) {
+                var emailCount = account.emails.length;
+                emailCount.should.eql(2);
+                account.emails[0].address.should.eql('iamritghimire@gmail.com');
+                done();
+            });
         });
     });
 
 
-    it('Check if an email is added user', function (done) {
-        Account.findOne({username: '12345'}, function (err, account) {
-            var emailCount = account.emails.length;
-            emailCount.should.eql(2);
-            account.emails[0].address.should.eql('iamritghimire@gmail.com');
-            done();
-        });
-    });
 
 
     it('Adding duplicate email must return false', function (done) {
