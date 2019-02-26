@@ -50,41 +50,19 @@ describe('Account', function () {
             var email = account.addEmail('iamritghimire@gmail.com');
             email.address.should.eql('iamritghimire@gmail.com');
             account.addEmail('mail@ranjitghimire.com.np');
-            account.save();
             var emailCount = account.emails.length;
             emailCount.should.eql(2);
             account.emails[0].address.should.eql('iamritghimire@gmail.com');
-            done();
-        });
-    });
+            var email2 = account.addEmail('iamritghimire@gmail.com');
+            email2.should.eql(false);
 
-
-
-
-    it('Adding duplicate email must return false', function (done) {
-        Account.findOne({username: '12345'}, function (err, account) {
-            var email = account.addEmail('iamritghimire@gmail.com');
-            email.should.eql(false);
-            done();
-        });
-    });
-
-    it('Adding primary email ', function (done) {
-        Account.findOne({username: '12345'}, function (err, account) {
             account.setPrimaryEmail('mail@ranjitghimire.com.np');
+            var email3 = account.getPrimaryEmail();
+            email3.should.eql('mail@ranjitghimire.com.np');
             done();
         });
     });
 
-
-
-    it('Adding primary email ', function (done) {
-        Account.findOne({username: '12345'}, function (err, account) {
-            var email = account.getPrimaryEmail();
-            email.should.eql('mail@ranjitghimire.com.np');
-            done();
-        });
-    });
 
     it('Adding primary email out of added email must cause error.', function (done) {
         Account.findOne({username: '12345'}, function (err, account) {
