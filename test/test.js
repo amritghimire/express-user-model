@@ -6,17 +6,17 @@ var Schema = mongoose.Schema;
 var db;
 var EUM = require('../index');
 
+
 const UserSchema = new Schema({});
 UserSchema.plugin(EUM);
-const Account = mongoose.model('Name', UserSchema);
-
+const Account = mongoose.model('user', UserSchema,'user');
+var verify = EUM.Verify(Account);
 
 
 describe('Account', function () {
 
     before(function (done) {
         db = mongoose.connect('mongodb://localhost/test_eum', {useNewUrlParser: true, useCreateIndex: true});
-        done();
         var account = new Account({
             username: '12345',
             password: 'testy'
@@ -25,6 +25,7 @@ describe('Account', function () {
         account.save(function (error) {
             if (error) console.log('error' + error.message);
             else console.log('no error');
+            done();
         });
     });
 
@@ -34,7 +35,6 @@ describe('Account', function () {
         });
 
     });
-
 
 
     it('find a user by username', function (done) {
@@ -76,23 +76,17 @@ describe('Account', function () {
 
     it('Adding primary email ', function (done) {
         Account.findOne({username: '12345'}, function (err, account) {
-            var email = account.setPrimaryEmail('iamritghimire@gmail.com');
+            account.setPrimaryEmail('mail@ranjitghimire.com.np');
             done();
         });
     });
 
-    it('Adding primary email ', function (done) {
-        Account.findOne({username: '12345'}, function (err, account) {
-            var email = account.setPrimaryEmail('iamritghimire@gmail.com');
-            done();
-        });
-    });
 
 
     it('Adding primary email ', function (done) {
         Account.findOne({username: '12345'}, function (err, account) {
             var email = account.getPrimaryEmail();
-            email.should.eql('iamritghimire@gmail.com');
+            email.should.eql('mail@ranjitghimire.com.np');
             done();
         });
     });
@@ -113,5 +107,23 @@ describe('Account', function () {
         });
     });
 
+    it('Check for verification code', function (done) {
+        Account.findOne({username: '12345'}, function (err, account) {
+            account.sendVerificationToken('iamritghimire@gmail.com', function (email, token) {
 
+                verify({params: {token: token}}, null, function (err) {
+                    if(err){
+                        throw Error('error');
+                    }
+                });
+                verify({params: {token: '1212'}}, null, function (err) {
+                    if(err){
+                        done();
+                    }else{
+                        throw Error('error');
+                    }
+                });
+            });
+        });
+    });
 });
