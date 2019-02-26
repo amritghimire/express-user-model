@@ -1,4 +1,7 @@
 ## Express User Model
+[![Build Status](https://travis-ci.org/amritghimire/express-user-model.svg?branch=master)](https://travis-ci.org/amritghimire/express-user-model) 
+[![Coverage Status](https://coveralls.io/repos/github/amritghimire/express-user-model/badge.svg?branch=master)](https://coveralls.io/github/amritghimire/express-user-model?branch=master)
+[![npm version](https://badge.fury.io/js/express-user-model.svg)](https://badge.fury.io/js/express-user-model)
 
 This is a library to provide a user backbone with basic requirements to
 start with. It assumes you are using mongoose with the driver for Mongoose.
