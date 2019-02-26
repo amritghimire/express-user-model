@@ -1,0 +1,13 @@
+{
+  "esversion": 6,
+  "strict": "global",
+  "node": true,
+  "predef": [
+    "describe",
+    "it",
+    "before",
+    "after",
+    "beforeEach"
+  ],
+  "sub" : true
+}

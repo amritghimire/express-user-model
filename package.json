@@ -1,0 +1,40 @@
+{
+  "name": "express-user-model",
+  "version": "0.1.0",
+  "description": "A user model setup for express and mongoose with basic features like email verification and so on",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amritghimire/express-user-model.git"
+  },
+  "keywords": [
+    "express",
+    "passport",
+    "mongoose",
+    "user",
+    "model",
+    "email",
+    "verification",
+    "amrit",
+    "ghimire"
+  ],
+  "author": "Amrit Ghimire <iamritghimire@gmail.com> (https://amritghimire.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amritghimire/express-user-model/issues"
+  },
+  "homepage": "https://github.com/amritghimire/express-user-model#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "jshint": "^2.10.1",
+    "mocha": "^6.0.1",
+    "mongoose": "^5.4.15",
+    "should": "^13.2.3"
+  },
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
+}
