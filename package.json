@@ -1,6 +1,6 @@
 {
   "name": "express-user-model",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A user model setup for express and mongoose with basic features like email verification and so on",
   "main": "index.js",
   "scripts": {
