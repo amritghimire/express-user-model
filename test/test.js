@@ -73,6 +73,33 @@ describe('Account', function () {
         e.should.eql(3);
     });
 
+    it('stores the username in lowercase (pre-save hook)', async function () {
+        var account = new Account({ username: 'MixedCaseUser' });
+        await account.save();
+        var found = await Account.findOne({ username: 'mixedcaseuser' });
+        found.username.should.eql('mixedcaseuser');
+    });
+
+    it('defaults is_active to true', async function () {
+        var account = await Account.findOne({ username: '12345' });
+        account.is_active.should.eql(true);
+    });
+
+    it('returns the correct full_name for a user with first and last name', async function () {
+        var account = await Account.findOne({ username: '12345' });
+        account.first_name = 'Amrit';
+        account.last_name = 'Ghimire';
+        account.full_name().should.eql('Amrit Ghimire');
+    });
+
+    it('sendVerificationToken returns null for an already-verified email', async function () {
+        var account = await Account.findOne({ username: '12345' });
+        account.addEmail('alreadyverified@example.com');
+        account.getEmail('alreadyverified@example.com').verified = true;
+        var result = await account.sendVerificationToken('alreadyverified@example.com');
+        should.not.exist(result);
+    });
+
     it('Check for verification code', async function () {
         var account = await Account.findOne({username: '12345'});
         var verificationData = await account.sendVerificationToken('iamritghimire@gmail.com');
