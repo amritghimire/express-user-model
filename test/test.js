@@ -27,6 +27,7 @@ describe('Account', function () {
             console.log('no error');
         } catch (error) {
             console.log('error' + error.message);
+            throw error;
         }
     });
 
@@ -58,6 +59,7 @@ describe('Account', function () {
         await account.setPrimaryEmail('mail@ranjitghimire.com.np');
         var email3 = account.getPrimaryEmail();
         email3.should.eql('mail@ranjitghimire.com.np');
+        await account.save();
     });
 
 
